@@ -176,3 +176,5 @@ wandb/
 # Apple system files
 #  These files are created by macOS and can be safely ignored.
 *.DS_Store
+/packed
+.DS_Store
