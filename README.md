@@ -17,6 +17,13 @@ Next, to install PyTorch with GPU support, follow instructions from https://pyto
 conda env update --file environment.yaml
 pip install -e .
 ```
+
+If you prefer to use specific package versions, you can use a fully pinned environment file instead by running:
+```
+conda env update --file environment_full.yaml
+pip install -e .
+```
+
 ## For Mac Users
 
 Clone the repository of the mps-enabled branch and install dependencies with the Mac specific environment file (Python=3.12, Pytorch >= 2.6):
