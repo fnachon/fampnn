@@ -26,11 +26,11 @@ pip install -e .
 
 ## For Mac Users
 
-Clone the repository of the mps-enabled branch and install dependencies with the Mac specific environment file (Python=3.12, Pytorch >= 2.6):
+Clone the repository of the mps-enabled branch and install dependencies with the Mac specific environment file (Python=3.13, PyTorch 2.14):
 ```bash
 git clone https://github.com/fnachon/fampnn.git
 cd fampnn
-conda env create -f Mac_environment.yml
+conda env create -f Mac_environment.yaml
 conda activate fampnn
 ```
 

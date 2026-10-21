@@ -3,11 +3,12 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python=3.12
+  - python=3.13
   - ca-certificates
   - openssl
   - scipy
   - certifi
+  - pytorch=2.14
   - torch-geometric
   - gemmi
   - biopython

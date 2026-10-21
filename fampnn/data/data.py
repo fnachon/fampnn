@@ -133,7 +133,8 @@ def torch_kabsch(a: TensorType["b n x"],
     with torch.autocast(device_type=a.device.type, enabled=False):
         ab = a.transpose(-1, -2) @ b
         u, s, vh = torch.linalg.svd(ab, full_matrices=False)
-        flip = torch.det(u @ vh) < 0
+        m = u @ vh
+        flip = (m[..., 0, :] * torch.cross(m[..., 1, :], m[..., 2, :], dim=-1)).sum(-1) < 0  # det of 3x3 (torch.det's LU kernel fails on MPS)
         u_ = torch.where(flip, -u[..., -1].T, u[..., -1].T).T
     u = torch.cat([u[..., :-1], u_[..., None]], dim=-1)
     return u @ vh
@@ -311,7 +312,7 @@ def batched_gather(data, inds, dim=0, no_batch_dims=0):
     ]
     remaining_dims[dim - no_batch_dims if dim >= 0 else dim] = inds
     ranges.extend(remaining_dims)
-    return data[ranges]
+    return data[tuple(ranges)]
 
 def atom37_to_atom14(aatype: TensorType["... n", int],
                      all_atom_pos: TensorType["... n 37 3", float],
